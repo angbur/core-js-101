@@ -7,8 +7,6 @@
  *                                                                                           *
  ******************************************************************************************* */
 
-const { angleBetweenClockHands } = require("./04-date-tasks");
-
 
 /**
  * Returns an area of a rectangle given by width and height.
