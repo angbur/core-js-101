@@ -190,8 +190,17 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const arr = Array.from(str);
+  let result = null;
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (arr.filter((el) => el === arr[i]).length === 1) {
+      result = arr[i];
+      break;
+    }
+  }
+  return result;
 }
 
 
@@ -217,8 +226,9 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const base = [a, b].sort().toLocaleString();
+  return (isStartIncluded ? '[' : '(').concat(base, (isEndIncluded ? ']' : ')')).replace(',', ', ');
 }
 
 
@@ -251,8 +261,8 @@ function reverseString(str) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return Array.from(num.toString()).reverse().join('');
 }
 
 
@@ -276,8 +286,14 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  return Array.from(ccn.toString().trim()).map((el, id) => {
+    let a = (Number(el) * (id % 2 === 0 ? 1 : 2));
+    if (a > 9) {
+      a = Array.from(a.toString()).map((dig) => Number(dig, 10)).reduce((pr, ac) => pr + ac);
+    }
+    return a;
+  }).reduce((prev, acc) => prev + acc) % 10 === 0;
 }
 
 /**
@@ -294,8 +310,11 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const n = Array.from(num.toString()).reduce((prev, acc) => Number(prev) + Number(acc));
+  if (n > 9) {
+    return getDigitalRoot(n);
+  } return n;
 }
 
 
@@ -345,8 +364,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
